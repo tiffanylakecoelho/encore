@@ -16,7 +16,7 @@ function Navbar() {
         <a href="#contact" className="hover:text-gray-300">
           Contact
         </a>
-        <a href="#log-in" className="hover:text-gray-300">
+        <a href="/log-in" className="hover:text-gray-300">
           Log In
         </a>
         <Link href="/sign-up" className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition">

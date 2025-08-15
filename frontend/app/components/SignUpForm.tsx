@@ -1,5 +1,7 @@
-// components/SignUpForm.tsx
 import { useState } from "react";
+import TextInputField from "./TextInputField";
+import PasswordField from "./PasswordField";
+import ErrorMessage from "./ErrorMessage";
 
 export default function SignUpForm() {
   const [form, setForm] = useState({
@@ -38,11 +40,8 @@ export default function SignUpForm() {
     if (!validateForm()) return;
 
     try {
-      // TODO: Connect to your backend signup API here
       console.log("Signing up:", form);
-
-      // Example: redirect on success
-      // router.push("/dashboard");
+      // router.push("/dashboard"); // example redirect
     } catch (err) {
       setError("Something went wrong. Please try again.");
     }
@@ -53,81 +52,58 @@ export default function SignUpForm() {
       <div className="w-full max-w-md rounded-lg bg-gray-900 p-6 shadow-lg">
         <h1 className="mb-6 text-2xl font-bold text-center">Sign Up</h1>
 
-        {error && (
-          <p className="mb-4 rounded bg-red-100 p-2 text-sm text-red-600">
-            {error}
-          </p>
-        )}
+        {error && <ErrorMessage message={error} />}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Display Name */}
-          <div>
-            <label className="block text-sm text-gray-300 font-medium">
-              Display Name
-            </label>
-            <input
-              type="text"
-              name="displayName"
-              value={form.displayName}
-              onChange={handleChange}
-              placeholder="Optional"
-              className="mt-1 w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-            />
-          </div>
+          <TextInputField
+            label="Display Name"
+            name="displayName"
+            value={form.displayName}
+            onChange={handleChange}
+            required
+          />
 
-          {/* Email */}
-          <div>
-            <label className="block text-sm text-gray-300 font-medium">
-              Email *
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="mt-1 w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-            />
-          </div>
+          <TextInputField
+            label="Email"
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm text-gray-300 font-medium">
-              Password *
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-              className="mt-1 w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-            />
-            <p className="mt-1 text-xs">Must be at least 8 characters.</p>
-          </div>
+          <PasswordField
+            label="Password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
 
-          {/* Confirm Password */}
-          <div>
-            <label className="block text-sm text-gray-300 font-medium">
-              Confirm Password *
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              required
-              className="mt-1 w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-            />
-          </div>
+          <PasswordField
+            label="Confirm Password"
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            required
+          />
 
-          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full rounded bg-blue-600 px-4 py-2 font-semibold transition hover:bg-blue-700"
+            className="w-full rounded bg-purple-600 px-4 py-2 font-semibold transition hover:bg-blue-700"
           >
             Create Account
           </button>
+
+          <p className="text-center text-sm text-gray-600 font-inter">
+          Have an account?{" "}
+          <a
+            href="/log-in"
+            className="text-white hover:underline"
+          >
+            Log in here
+          </a>
+        </p>
         </form>
       </div>
     </div>
